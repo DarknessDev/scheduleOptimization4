@@ -39,9 +39,7 @@ public class MainWindow extends VerticalLayout implements View {
     protected void setupIU() {
         setSizeFull();
         setDefaultComponentAlignment(Alignment.TOP_CENTER);
-        title.addStyleName(ValoTheme.LABEL_H2);
-        updatedFields.setDefaultComponentAlignment(Alignment.TOP_CENTER);
-        vertFormLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+//        title.addStyleName(ValoTheme.LABEL_H2);  
         
     }
 
@@ -82,7 +80,6 @@ public class MainWindow extends VerticalLayout implements View {
         vertFormLayout.setVisible(false);
         
         FormLayout formLayout = new FormLayout();
-        formLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 
         TextField groupName1 = new TextField("Group 1");
         groupName1.setRequiredIndicatorVisible(true);
@@ -106,7 +103,9 @@ public class MainWindow extends VerticalLayout implements View {
     }
 
     private void addGroup(TextField groupName1, TextField groupName2, TextField groupName3) {
-        return;
+        presenter.addGroup(groupName1.getValue());
+        presenter.addGroup(groupName2.getValue());
+        presenter.addGroup(groupName3.getValue());        
     }
 
     private void addSpecialty(ClickEvent event, TextField nameOfSpec) {
@@ -119,14 +118,6 @@ public class MainWindow extends VerticalLayout implements View {
             return;
         }
         
-        
-        if (numOfSpecialities != 1) {
-            numOfSpecialities--;
-        } else {
-            nameOfSpec.setValue("");
-        }
-
-        specialityInputs();
     }
 
 }

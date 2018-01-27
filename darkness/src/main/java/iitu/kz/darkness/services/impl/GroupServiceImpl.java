@@ -7,34 +7,34 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import iitu.kz.darkness.dao.SpecialityDao;
-import iitu.kz.darkness.entities.Speciality;
-import iitu.kz.darkness.services.SpecialityService;
+import iitu.kz.darkness.dao.GroupDao;
+import iitu.kz.darkness.entities.Group;
+import iitu.kz.darkness.services.GroupService;
 
 @Service
 @Transactional
-public class SpecialityServiceImpl implements SpecialityService{
+public class GroupServiceImpl implements GroupService{
 
     @Autowired
-    private SpecialityDao dao;
-
+    private GroupDao dao;
+    
     @Override
-    public Speciality save(Speciality entity) {
+    public Group save(Group entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Speciality update(Speciality entity) {
+    public Group update(Group entity) {
         return dao.update(entity);
     }
 
     @Override
-    public boolean delete(Speciality entity) {
+    public boolean delete(Group entity) {
         return dao.delete(entity);
     }
 
     @Override
-    public List<Speciality> findAll() {
+    public List<Group> findAll() {
         return dao.findAll();
     }
 
