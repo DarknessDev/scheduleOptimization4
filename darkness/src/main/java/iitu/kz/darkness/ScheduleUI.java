@@ -7,6 +7,8 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.UI;
 
+import iitu.kz.darkness.ui.MainWindow;
+
 @SuppressWarnings("serial")
 @SpringUI
 @Theme("valo")
@@ -16,7 +18,7 @@ public class ScheduleUI extends UI{
     @Override
     protected void init(VaadinRequest request) {
         navigator = new Navigator(this,this);
-//        navigator.addView("", new MainView());
+        navigator.addView("", new MainWindow());
 //        navigator.addView("register", UserRegisterViewImpl.class);        
     }
     
