@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 @SuppressWarnings("serial")
 @Embeddable
-public class SpecialityId implements Serializable {
+public class SpecialityPlanId implements Serializable {
 
     @Column(name = "SPECIALITY_ID")
     private long spec_id;

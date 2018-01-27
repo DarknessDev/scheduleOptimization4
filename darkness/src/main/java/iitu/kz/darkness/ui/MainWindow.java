@@ -1,29 +1,28 @@
 package iitu.kz.darkness.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
+import iitu.kz.darkness.entities.Speciality;
+
 @SuppressWarnings("serial")
 public class MainWindow extends VerticalLayout implements View {
 
-    Label title = new Label();
     private VerticalLayout updatedFields = new VerticalLayout();
     private VerticalLayout vertFormLayout = new VerticalLayout();
 
     private long numOfSpecialities = 0;
+    private long numOfSpec = 0;
+
+    private long currSpecId = 0;
 
     private MainWindowPresenter presenter;
 
@@ -38,14 +37,18 @@ public class MainWindow extends VerticalLayout implements View {
 
     protected void setupIU() {
         setSizeFull();
-        setDefaultComponentAlignment(Alignment.TOP_CENTER);
-//        title.addStyleName(ValoTheme.LABEL_H2);  
-        
+        setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+        updatedFields.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+        vertFormLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
+
     }
 
     protected void createSpecialityInputs() {
 
-        title.setValue("Speciality");
+        Label title = new Label();
+        title.setValue("Wellcome");
+        title.addStyleName(ValoTheme.LABEL_H2);
+        title.setSizeUndefined();
 
         TextField numOfSpec = new TextField("How many speciality do you want to add ?");
         numOfSpec.setPlaceholder("1");
@@ -53,9 +56,10 @@ public class MainWindow extends VerticalLayout implements View {
         Button btnOk = new Button("OK");
         btnOk.addClickListener(event -> ok(numOfSpec));
 
-        updatedFields.addComponents(numOfSpec, btnOk);
+        updatedFields.addComponents(title, numOfSpec, btnOk);
 
-        addComponents(title, updatedFields);
+
+        addComponents(updatedFields);
 
     }
 
@@ -71,15 +75,53 @@ public class MainWindow extends VerticalLayout implements View {
     protected void specialityInputs() {
         updatedFields.removeAllComponents();
 
+        Label title = new Label();
+        title.setValue("Create Speciality");
+        title.addStyleName(ValoTheme.LABEL_H2);
+        title.setSizeUndefined();
+
         TextField specName = new TextField("Name of Speciality");
 
         Button btnCreate = new Button("Create");
-        btnCreate.addClickListener(event -> addSpecialty(event,specName));
+        btnCreate.addClickListener(event -> addSpecialty(event, specName));
 
-        vertFormLayout.removeAllComponents();
-        vertFormLayout.setVisible(false);
-        
+        updatedFields.addComponents(title, specName, btnCreate);
+        addComponent(updatedFields);
+
+    }
+
+    private void addGroup(long currSpecId2, TextField groupName1, TextField groupName2, TextField groupName3) {
+        if (!groupName1.isEmpty() && !groupName2.isEmpty() && !groupName3.isEmpty()) {
+            presenter.addGroup(currSpecId2, groupName1.getValue());
+            presenter.addGroup(currSpecId2, groupName2.getValue());
+            presenter.addGroup(currSpecId2, groupName3.getValue());
+
+            numOfSpec++;
+            if (numOfSpecialities > numOfSpec) {
+                vertFormLayout.removeAllComponents();
+                specialityInputs();
+            }else{
+                removeAllComponents();
+            }
+        }
+    }
+
+    private void addSpecialty(ClickEvent event, TextField nameOfSpec) {
+        if (!nameOfSpec.isEmpty()) {
+            Speciality addSpeciality = presenter.addSpeciality(nameOfSpec.getValue());
+            currSpecId = addSpeciality.getId();
+            vertFormLayout.setVisible(true);
+            event.getButton().setVisible(false);
+            groupInputs();
+        } else {
+            return;
+        }
+
+    }
+
+    private void groupInputs() {
         FormLayout formLayout = new FormLayout();
+        formLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
 
         TextField groupName1 = new TextField("Group 1");
         groupName1.setRequiredIndicatorVisible(true);
@@ -91,33 +133,12 @@ public class MainWindow extends VerticalLayout implements View {
         groupName3.setRequiredIndicatorVisible(true);
 
         formLayout.addComponents(groupName1, groupName2, groupName3);
-        
+
         Button btnAdd = new Button("Add");
-        btnCreate.addClickListener(event -> addGroup(groupName1,groupName2,groupName3));
+        btnAdd.addClickListener(event -> addGroup(currSpecId, groupName1, groupName2, groupName3));
 
-        vertFormLayout.addComponents(formLayout, btnAdd);        
-        
-        updatedFields.addComponents(specName, btnCreate, vertFormLayout);
-        
-        
-    }
-
-    private void addGroup(TextField groupName1, TextField groupName2, TextField groupName3) {
-        presenter.addGroup(groupName1.getValue());
-        presenter.addGroup(groupName2.getValue());
-        presenter.addGroup(groupName3.getValue());        
-    }
-
-    private void addSpecialty(ClickEvent event, TextField nameOfSpec) {
-        if (!nameOfSpec.isEmpty()) {
-            presenter.addSpeciality(nameOfSpec.getValue());
-            vertFormLayout.setVisible(true);
-            title.setValue("Groups of Specialties");
-            event.getButton().setVisible(false);
-        } else {
-            return;
-        }
-        
+        vertFormLayout.addComponents(formLayout, btnAdd);
+        addComponent(vertFormLayout);
     }
 
 }

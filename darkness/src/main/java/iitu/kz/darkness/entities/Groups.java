@@ -14,8 +14,8 @@ import lombok.Data;
 @SuppressWarnings("serial")
 @Data
 @Entity
-@Table(name = "GROUP")
-public class Group implements Serializable {
+@Table(name = "GROUPS")
+public class Groups implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -2,14 +2,14 @@ package iitu.kz.darkness.services;
 
 import java.util.List;
 
-import iitu.kz.darkness.entities.Group;
+import iitu.kz.darkness.entities.Groups;
 
 public interface GroupService {
-    Group save(Group entity);
+    Groups save(Groups entity);
 
-    Group update(Group entity);
+    Groups update(Groups entity);
 
-    boolean delete(Group entity);
+    boolean delete(Groups entity);
 
-    List<Group> findAll();
+    List<Groups> findAll();
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import iitu.kz.darkness.dao.GroupDao;
-import iitu.kz.darkness.entities.Group;
+import iitu.kz.darkness.entities.Groups;
 import iitu.kz.darkness.services.GroupService;
 
 @Service
@@ -19,22 +19,22 @@ public class GroupServiceImpl implements GroupService{
     private GroupDao dao;
     
     @Override
-    public Group save(Group entity) {
+    public Groups save(Groups entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Group update(Group entity) {
+    public Groups update(Groups entity) {
         return dao.update(entity);
     }
 
     @Override
-    public boolean delete(Group entity) {
+    public boolean delete(Groups entity) {
         return dao.delete(entity);
     }
 
     @Override
-    public List<Group> findAll() {
+    public List<Groups> findAll() {
         return dao.findAll();
     }
 

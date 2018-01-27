@@ -16,7 +16,7 @@ import lombok.Data;
 public class SpecialityPlan implements Serializable {
 
     @EmbeddedId
-    private SpecialityId id;
+    private SpecialityPlanId id;
 
     @Column(name = "HOURS_PER_WEEK")
     private long hoursPerWeek;

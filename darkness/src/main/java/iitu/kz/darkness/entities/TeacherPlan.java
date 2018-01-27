@@ -12,7 +12,7 @@ import lombok.Data;
 @SuppressWarnings("serial")
 @Data
 @Entity
-@Table(name = "SPECIALITY_PLAN")
+@Table(name = "TEACHER_PLAN")
 public class TeacherPlan implements Serializable {
 
     @EmbeddedId

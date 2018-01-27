@@ -2,7 +2,7 @@ package iitu.kz.darkness.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import iitu.kz.darkness.entities.Group;
+import iitu.kz.darkness.entities.Groups;
 import iitu.kz.darkness.entities.Speciality;
 import iitu.kz.darkness.services.GroupService;
 import iitu.kz.darkness.services.SpecialityService;
@@ -13,18 +13,19 @@ public class MainWindowPresenter extends AbstractBasePresenter{
     @Autowired
     private SpecialityService serviceSpec;
     
-//    @Autowired
-//    private GroupService serviceGroup;
+    @Autowired
+    private GroupService serviceGroup;
 
-    public void addSpeciality(String specName) {
+    public Speciality addSpeciality(String specName) {
         Speciality spec = new Speciality();
         spec.setName(specName);
-        serviceSpec.save(spec);
+        return serviceSpec.save(spec);
     }
 
-    public void addGroup(String groupName) {
-        Group group = new Group();
+    public void addGroup(long currSpecId, String groupName) {
+        Groups group = new Groups();
+        group.setSpec_id(currSpecId);
         group.setName(groupName);
-//        service.save(group);
+        serviceGroup.save(group);
     }
 }
