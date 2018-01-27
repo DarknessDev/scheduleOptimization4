@@ -8,6 +8,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -102,6 +103,7 @@ public class MainWindow extends VerticalLayout implements View {
                 specialityInputs();
             }else{
                 removeAllComponents();
+                UI.getCurrent().getNavigator().navigateTo("plan");
             }
         }
     }

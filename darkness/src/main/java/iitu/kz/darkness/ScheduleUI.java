@@ -8,6 +8,7 @@ import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.UI;
 
 import iitu.kz.darkness.ui.MainWindow;
+import iitu.kz.darkness.ui.plan.PlanWindow;
 
 @SuppressWarnings("serial")
 @SpringUI
@@ -19,6 +20,7 @@ public class ScheduleUI extends UI{
     protected void init(VaadinRequest request) {
         navigator = new Navigator(this,this);
         navigator.addView("", new MainWindow());
+        navigator.addView("plan", new PlanWindow());
 //        navigator.addView("register", UserRegisterViewImpl.class);        
     }
     
