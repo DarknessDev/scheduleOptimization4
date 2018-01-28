@@ -19,8 +19,8 @@ public class ScheduleUI extends UI{
     @Override
     protected void init(VaadinRequest request) {
         navigator = new Navigator(this,this);
-        navigator.addView("", new MainWindow());
-        navigator.addView("plan", new PlanWindow());
+        navigator.addView("testInput", new MainWindow());
+        navigator.addView("", new PlanWindow());
 //        navigator.addView("register", UserRegisterViewImpl.class);        
     }
     

@@ -38,4 +38,9 @@ public class GroupServiceImpl implements GroupService{
         return dao.findAll();
     }
 
+    @Override
+    public List<Groups> getGroupsBySpecId(long specId) {
+        return dao.getGroupsBySpecId(specId);
+    }
+
 }

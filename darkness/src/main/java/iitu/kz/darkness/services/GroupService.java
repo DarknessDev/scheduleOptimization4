@@ -12,4 +12,6 @@ public interface GroupService {
     boolean delete(Groups entity);
 
     List<Groups> findAll();
+
+    List<Groups> getGroupsBySpecId(long specId);
 }
